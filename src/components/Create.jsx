@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import { nanoid } from "nanoid";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { recipecontext } from "../Context/RecipeContext";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
     const [image, setimage] = useState("");
@@ -7,6 +10,8 @@ const Create = () => {
     const [description, setdescription] = useState("");
     const [ingredients, setingredients] = useState("");
     const [instructions, setinstructions] = useState("");
+    const [recipes, setrecipes] = useContext(recipecontext);
+    const navigate = useNavigate();
 
     const SubmitHandler = (e) => {
         e.preventDefault();
@@ -18,8 +23,12 @@ const Create = () => {
             ingredients,
             instructions,
         };
-        console.log(newRecipe);
+        setrecipes([...recipes,newRecipe]);
+        toast.success('Recipe Created Succesfully!!');
+        navigate('/recipes');
     };
+
+    console.log(recipes);
     return (
         <form onSubmit={SubmitHandler} className="w-[70%] m-auto  pb-5">
             <h1 className="text-7xl mt-5 font-extrabold text-green-600 mb-[5%]">

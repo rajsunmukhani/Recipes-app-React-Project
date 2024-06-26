@@ -1,20 +1,18 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { recipecontext } from "../Context/RecipeContext";
+import { toast } from "react-toastify";
 
 const Details = () => {
-    const recipe = {
-        id: "mAi6vrfNOmNe1LdgZ_MTd",
-        title: "Italian Wedding Soup ",
-        image: "https://png.pngtree.com/png-clipart/20231127/original/pngtree-high-angle-view-of-italian-wedding-soup-in-a-bowl-on-png-image_13728005.png",
-        description:
-            "The BEST Italian Wedding Soup! A delicious and hearty soup made with bite size herbed beef and pork meatballs, veggies and acini de pepe",
-        ingredients:
-            "1/2 lb Ground beef|1/2 lb Ground veal|1/4 c Italian seasoned bread crumb|1 Egg|1 tb Parsley|Salt and pepper to taste|4 c Chicken broth|2 c Spinach leaves cut into piec|1/4 c Grated Pecorino Romano chees",
-        instructions:
-            "Combine the ground meat, bread crumbs, egg, parsley, salt and pepper in a bowl. Mix well and form into tiny meat balls. Bake on a cookie sheet for 30 minutes at 350F. Meanwhile, bring broth to a boil and add spinach. Cover and boil for 5 minutes. Add the meatballs to the hot broth, bring to a simmer. Stir in the cheese and serve immediately. Rita in Scottsdale 01/02/92 01:41 am",
-    };
+    const [recipes,setrecipes] = useContext(recipecontext);
+    const {id} = useParams();
+    const recipe = recipes.find(r => r.id === id);
+    const navigate = useNavigate();
 
     const DeleteHandler = () => {
-        console.log("Delete Recipe");
+        setrecipes(recipes.filter(r => r.id != id));
+        navigate('/recipes');
+        toast.success('Recipe Deleted Successfully!!');
     };
 
     return recipe ? (
@@ -29,7 +27,7 @@ const Details = () => {
                     <p className="text-zinc-400">{recipe.description}</p>
                     <div className="flex justify-between py-10 px-5">
                         <Link
-                            to={`/update-recipe/1`}
+                            to={`/update-recipe/${id}`}
                             className="text-blue-400 border-blue-400 border py-2 px-5"
                         >
                             Update
