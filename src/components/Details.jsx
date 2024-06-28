@@ -11,6 +11,7 @@ const Details = () => {
 
     const DeleteHandler = () => {
         setrecipes(recipes.filter(r => r.id != id));
+        localStorage.setItem('recipes', JSON.stringify(recipes.filter(r => r.id != id)));
         navigate('/recipes');
         toast.success('Recipe Deleted Successfully!!');
     };

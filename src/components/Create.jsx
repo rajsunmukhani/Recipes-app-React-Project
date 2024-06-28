@@ -24,6 +24,7 @@ const Create = () => {
             instructions,
         };
         setrecipes([...recipes,newRecipe]);
+        localStorage.setItem('recipes', JSON.stringify([...recipes,newRecipe]));
         toast.success('Recipe Created Succesfully!!');
         navigate('/recipes');
     };

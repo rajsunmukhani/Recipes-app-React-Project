@@ -223,3 +223,31 @@ Step 13:
 
             toast.succes(Recipe Updated Successfully!!);
             navigate("/recipes");
+
+
+Step 14:
+    Now, we will be making our data get stored and accessed in localstorage, so that it is not deleted at the time of refresh of our application.
+
+    Now, here at first in RecipeContext.jsx file make a useEffect which says at the time of mounting of application, either get the data in recipes variable from data stored in recipes variable in localStorage data, or if not found then make the recipes state variable as empty array.It will be coded as:
+
+        useEffect({
+            setrecipes(JSON.parse(localstorage.getItem('recipes')) || [])
+        },[]);
+
+    now remove the hardcoded data from recipes state variable, with initial value as empty array.
+
+Step 15: 
+    Now, we can see that new recipe created is not getting saved in localstorage, for that go to Create.jsx and in submitHandler function add: 
+
+        *localStorage.setItem("recipes",JSON.stringify([...recipes,newRecipe]));*
+
+    Now, once created recipe will be stored in application even after refreshing it.
+
+=>  Similarly the workflow will go for delete functionality as:
+
+    Go to Details.jsx and inside DeleteHandler function, add a chunk of code as:
+        *localstorage.setItem("recipes",JSON.stringify(recipes.filter(r => r.id != id)))*
+
+=>  Similarly the workflow will go for update functionality as:
+    Go to Update.jsx and inside UpdateHandler function, add a chunk of code as:
+        *localstorage.setItem("recipes",JSON.stringify(recipes.filter(copyrecipe)))*
