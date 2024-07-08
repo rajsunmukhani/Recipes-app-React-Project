@@ -13,7 +13,7 @@ const MainRouter = () => {
   return (
     <Routes>
         <Route path="/" element={<Layout />} />
-        <Route path="/create-recipe" element={<Create />} />
+        <Route path="/create_recipe" element={<Create />} />
         <Route path="/update-recipe/:id" element={<Update />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/recipes/:id" element={<Details />} />

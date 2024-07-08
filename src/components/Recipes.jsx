@@ -25,7 +25,7 @@ const Recipes = () => {
             </div>
             {pathname === '/recipes' && (
                 <a
-                href="/create-recipe"
+                href="/create_recipe"
                 className="cursor-pointer rounded-md absolute top-[15%] py-2 px-5 left-[10%]  bg-green-200 gap-x-3 flex items-center"
             >
                 <i className="text-3xl text-green-600 ri-add-box-line"></i>
